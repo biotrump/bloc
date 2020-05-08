@@ -12,9 +12,9 @@ dependencies:
   firebase_core: ^0.4.3+3
   google_sign_in: ^4.1.1
   firebase_auth: ^0.15.4
-  flutter_bloc:
-    path: ../../packages/flutter_bloc
-  equatable: ^1.0.0
+  flutter_bloc: ^4.0.0
+  #  path: ../../packages/flutter_bloc
+  equatable: ^1.1.1
   meta: ^1.1.6
   rxdart: ^0.23.1
   font_awesome_flutter: ^8.4.0

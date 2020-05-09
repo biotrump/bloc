@@ -49,7 +49,7 @@ void main() {
       },
       act: (bloc) => bloc.add(AppStarted()),
       expect: [
-        AuthenticationUnauthenticated(),
+        AuthenticationRegisterEmail(),
       ],
     );
 
@@ -61,19 +61,19 @@ void main() {
       },
       act: (bloc) => bloc.add(AppStarted()),
       expect: [
-        AuthenticationAuthenticated(),
+        AuthenticationCryptoSDK(),
       ],
     );
   });
 
-  group('LoggedIn', () {
+  group('CryptoSDKIn', () {
     blocTest(
       'emits [loading, authenticated] when token is persisted',
       build: () async => authenticationBloc,
-      act: (bloc) => bloc.add(LoggedIn(token: 'instance.token')),
+      act: (bloc) => bloc.add(CryptoSDKIn(token: 'instance.token')),
       expect: [
         AuthenticationLoading(),
-        AuthenticationAuthenticated(),
+        AuthenticationCryptoSDK(),
       ],
     );
   });
@@ -85,7 +85,7 @@ void main() {
       act: (bloc) => bloc.add(LoggedOut()),
       expect: [
         AuthenticationLoading(),
-        AuthenticationUnauthenticated(),
+        AuthenticationRegisterEmail(),
       ],
     );
   });

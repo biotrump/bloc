@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_login/login/login_page.dart';
 import 'package:user_repository/user_repository.dart';
 
 import 'package:flutter_login/authentication/authentication.dart';
-import 'package:flutter_login/splash/splash.dart';
-import 'package:flutter_login/home/home.dart';
+import 'package:flutter_login/welcome/welcome.dart';
+import 'package:flutter_login/register/register_email_page.dart';
+import 'package:flutter_login/cryptosdk/keyserver_page.dart';
+import 'package:flutter_login/congratulation/congratulation.dart';
+import 'package:flutter_login/summary/summary.dart';
+
 import 'package:flutter_login/common/common.dart';
 
 class SimpleBlocDelegate extends BlocDelegate {
@@ -58,18 +61,28 @@ class App extends StatelessWidget {
     return MaterialApp(
       home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
         builder: (context, state) {
-          if (state is AuthenticationAuthenticated) {
-            return HomePage();
+          if (state is AuthenticationRegisterEmail) {
+            return RegisterEmailPage(key: ValueKey('RegisterEmailPage'), userRepository: userRepository);
           }
-          if (state is AuthenticationUnauthenticated) {
-            return LoginPage(userRepository: userRepository);
-          }
+
           if (state is AuthenticationLoading) {
-            return LoadingIndicator();
+            return LoadingIndicator(key: ValueKey('LoadingIndicator'));
+          }
+
+          if(state is AuthenticationCryptoSDK){
+            return KeyServerPage(key: ValueKey('KeyServerPage'), userRepository: userRepository);
+          }
+
+          if (state is AuthenticationCongratulation) {
+            return CongratulationPage(key: ValueKey('CongratulationPage'));
+          }
+
+          if (state is AuthenticationSummary){
+            return SummaryPage(key: ValueKey('SummaryPage'), username: userRepository.username);
           }
           //default page
           //if(state is AuthenticationEula){
-            return SplashScreen();  //SplashPage();
+            return WelcomeScreen(key: ValueKey('WelcomeScreen'));  //SplashPage();
           //}
           //return null;
         },

@@ -4,11 +4,14 @@ import 'package:meta/meta.dart';
 
 //verify, validate and authenticate user account
 class UserRepository {
+  String username;
+
   //authenticate the email account
   Future<String> authenticate({
     @required String username,
     //@required String password,
   }) async {
+    this.username = username;
     await Future.delayed(Duration(seconds: 5));
     //do the real authentication.
     return 'authentication succeeds to get token!';

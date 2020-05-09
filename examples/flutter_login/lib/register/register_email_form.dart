@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_login/login/bloc/login_bloc.dart';
+import 'package:flutter_login/register/bloc/register_email_bloc.dart';
 import 'package:email_validator/email_validator.dart';
 
-import 'bloc/login_bloc.dart';
+import 'bloc/register_email_bloc.dart';
 
 //import 'package:flutter_login/validators.dart';
 
@@ -20,26 +20,26 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    _onLoginButtonPressed() {
+    _onSignUpButtonPressed() {
       if(!cancel){
         //signup button now
-        BlocProvider.of<LoginBloc>(context).add(//add to send an event to BLoC
-          LoginButtonPressed(
+        BlocProvider.of<RegisterEmailBloc>(context).add(//add to send an event to BLoC
+          SignUpButtonPressed(
             username: _usernameController.text
           ),
         );
         cancel = true;
       }else{
         //cancel button now
-        BlocProvider.of<LoginBloc>(context).add(LoginCancelButtonPressed());
+        BlocProvider.of<RegisterEmailBloc>(context).add(SignUpCancelButtonPressed());
         cancel = false;
       }
     }
 
-    return BlocListener<LoginBloc, LoginState>(
+    return BlocListener<RegisterEmailBloc, LoginState>(
       listener: (context, state) {
         //snackBar is bottom status
-        if (state is LoginFailure) {
+        if (state is RegisterEmailFailure) {
           Scaffold.of(context).showSnackBar(
             SnackBar(
               content: Text('${state.error}'),
@@ -49,27 +49,27 @@ class _LoginFormState extends State<LoginForm> {
         }
 
         //login progressing
-        if (state is LoginLoading) {
+        if (state is RegisterEmailOnGoing) {
           Scaffold.of(context).showSnackBar(
             SnackBar(
-              content: Text('LoginLoading $state'),
+              content: Text('RegisterEmailOnGoing $state'),
               backgroundColor: Colors.green,
             ),
           );
         }
 
         //login progressing
-        if (state is LoginCompleted) {
+        if (state is RegisterEmailCompleted) {
+          fEmailValid = false;  //disable button
           Scaffold.of(context).showSnackBar(
             SnackBar(
-              content: Text('LoginCompleted $state'),
+              content: Text('RegisterEmailCompleted $state'),
               backgroundColor: Colors.blue,
             ),
           );
         }
-
       },
-      child: BlocBuilder<LoginBloc, LoginState>(
+      child: BlocBuilder<RegisterEmailBloc, LoginState>(
         builder: (context, state) {
           return Form(
             child: Column(
@@ -103,12 +103,12 @@ class _LoginFormState extends State<LoginForm> {
                 ),
                 */
                 RaisedButton(
-                  onPressed: fEmailValid? _onLoginButtonPressed : null,
-                      //state is! LoginLoading ? _onLoginButtonPressed : null,
+                  onPressed: fEmailValid? _onSignUpButtonPressed : null,
+                      //state is! RegisterEmailOnGoing ? _onSignUpButtonPressed : null,
                   child: Text(cancel?'Cancel':'Sign up'),
                 ),
                 Container(
-                  child: state is LoginLoading
+                  child: state is RegisterEmailOnGoing
                       ? CircularProgressIndicator()
                       : null,
                 ),

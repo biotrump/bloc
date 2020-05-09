@@ -4,26 +4,29 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_login/authentication/authentication.dart';
 
-class SplashScreen extends StatelessWidget {
+class WelcomeScreen extends StatelessWidget {
+    WelcomeScreen({Key key})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: SplashPage(),
+        child: WelcomePage(),
       ),
     );
   }
 }
 
-class SplashPage extends StatefulWidget {
+class WelcomePage extends StatefulWidget {
 
   @override
-  State<SplashPage> createState() {
-    return _SplashPage();
+  State<WelcomePage> createState() {
+    return _WelcomePage();
   }
 }
 
-class _SplashPage extends State<SplashPage> {
+class _WelcomePage extends State<WelcomePage> {
   bool agreeEula = false;
   @override
   Widget build(BuildContext context) {

@@ -7,26 +7,26 @@ import 'package:user_repository/user_repository.dart';
 
 import 'package:flutter_login/authentication/authentication.dart';
 
-part 'login_event.dart';
-part 'login_state.dart';
+part 'register_email_event.dart';
+part 'register_email_state.dart';
 
-class LoginBloc extends Bloc<LoginEvent, LoginState> {
+class RegisterEmailBloc extends Bloc<RegisterEmailEvent, LoginState> {
   final UserRepository userRepository;
   final AuthenticationBloc authenticationBloc;
 
-  LoginBloc({
+  RegisterEmailBloc({
     @required this.userRepository,
     @required this.authenticationBloc,
   })  : assert(userRepository != null),
         assert(authenticationBloc != null);
 
   @override
-  LoginState get initialState => LoginCompleted();
+  LoginState get initialState => RegisterEmailCompleted();
 
   @override
-  Stream<LoginState> mapEventToState(LoginEvent event) async* {
-    if (event is LoginButtonPressed) {
-      yield LoginLoading();//show loading .....
+  Stream<LoginState> mapEventToState(RegisterEmailEvent event) async* {
+    if (event is SignUpButtonPressed) {
+      yield RegisterEmailOnGoing();//show loading .....
 
       try {
         //wait for user account authentication
@@ -37,16 +37,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           username: event.username,
         );
         //yes, authenticated, update login UI
-        yield LoginCompleted();
+        yield RegisterEmailCompleted();
 
         //do something special
         await Future.delayed(Duration(seconds: 2));
         //inform bloc to goto next page
-        authenticationBloc.add(LoggedIn(token: token));//send bloc event with token for next stage process
+        authenticationBloc.add(CryptoSDKIn(username: event.username, token: token));//send bloc event with token for next stage process
         //do something and goto next state
       } catch (error) {
         //no, authentication failure
-        yield LoginFailure(error: error.toString());
+        yield RegisterEmailFailure(error: error.toString());
       }
     }
   }

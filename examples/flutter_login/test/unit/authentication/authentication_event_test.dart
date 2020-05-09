@@ -13,15 +13,15 @@ void main() {
       });
     });
 
-    group('LoggedIn', () {
+    group('CryptoSDKIn', () {
       test('props are [token]', () {
-        expect(LoggedIn(token: 'token').props, ['token']);
+        expect(CryptoSDKIn(token: 'token').props, ['token']);
       });
 
-      test('toString is "LoggedIn { token: token }"', () {
+      test('toString is "CryptoSDKIn { token: token }"', () {
         expect(
-          LoggedIn(token: 'token').toString(),
-          'LoggedIn { token: token }',
+          CryptoSDKIn(token: 'token').toString(),
+          'CryptoSDKIn { token: token }',
         );
       });
     });

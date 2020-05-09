@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_login/login/login_form.dart';
+import 'package:flutter_login/register/register_email_form.dart';
 import 'package:user_repository/user_repository.dart';
 
 import 'package:flutter_login/authentication/authentication.dart';
-import 'package:flutter_login/login/bloc/login_bloc.dart';
+import 'package:flutter_login/register/bloc/register_email_bloc.dart';
 
-class LoginPage extends StatelessWidget {
+class RegisterEmailPage extends StatelessWidget {
   final UserRepository userRepository;
 
-  LoginPage({Key key, @required this.userRepository})
+  RegisterEmailPage({Key key, @required this.userRepository})
       : assert(userRepository != null),
         super(key: key);
 
@@ -22,7 +22,7 @@ class LoginPage extends StatelessWidget {
       ),
       body: BlocProvider(
         create: (context) {
-          return LoginBloc(
+          return RegisterEmailBloc(
             authenticationBloc: BlocProvider.of<AuthenticationBloc>(context),
             userRepository: userRepository,
           );

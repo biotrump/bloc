@@ -33,29 +33,27 @@ class AuthenticationBloc
     }
 
     if (event is EulaAgreed){
-      yield AuthenticationUnauthenticated();
+      yield AuthenticationRegisterEmail();
     }
-    /*
-    {
-      final bool hasToken = await userRepository.hasToken();
 
-      if (hasToken) {
-        yield AuthenticationAuthenticated();
-      } else {
-        yield AuthenticationUnauthenticated();
-      }
+    if (event is CryptoSDKIn) {
+      //yield AuthenticationLoading();
+      //await userRepository.persistToken(event.token);
+      yield AuthenticationCryptoSDK();
     }
-*/
-    if (event is LoggedIn) {
-      yield AuthenticationLoading();
-      await userRepository.persistToken(event.token);
-      yield AuthenticationAuthenticated();
+
+    if(event is CongratulationIn){
+      yield AuthenticationCongratulation();
+    }
+
+    if(event is SummaryIn){
+      yield AuthenticationSummary();
     }
 
     if (event is LoggedOut) {
       yield AuthenticationLoading();
-      await userRepository.deleteToken();
-      yield AuthenticationUnauthenticated();
+      //await userRepository.deleteToken();
+      yield AuthenticationRegisterEmail();
     }
   }
 }

@@ -12,17 +12,23 @@ class AppStarted extends AuthenticationEvent {}
 
 class EulaAgreed extends AuthenticationEvent {}
 
-//
-class LoggedIn extends AuthenticationEvent {
+//ui->bloc
+class CryptoSDKIn extends AuthenticationEvent {
   final String token;
-
-  const LoggedIn({@required this.token});
-
-  @override
-  List<Object> get props => [token];
+  final String username;
+  const CryptoSDKIn({@required this.username, @required this.token});
 
   @override
-  String toString() => 'LoggedIn { token: $token }';
+  List<Object> get props => [token, username];
+
+  @override
+  String toString() => 'CryptoSDKIn { token: $token, username: $username }';
 }
+
+//ui->bloc
+class CongratulationIn extends AuthenticationEvent {}
+
+//ui->bloc
+class SummaryIn extends AuthenticationEvent {}
 
 class LoggedOut extends AuthenticationEvent {}

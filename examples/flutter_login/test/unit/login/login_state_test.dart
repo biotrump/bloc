@@ -1,37 +1,37 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_login/login/bloc/login_bloc.dart';
+import 'package:flutter_login/register/bloc/register_email_bloc.dart';
 
 void main() {
   group('LoginState', () {
-    group('LoginCompleted', () {
+    group('RegisterEmailCompleted', () {
       test('props are []', () {
-        expect(LoginCompleted().props, []);
+        expect(RegisterEmailCompleted().props, []);
       });
 
-      test('toString is LoginCompleted', () {
-        expect(LoginCompleted().toString(), 'LoginCompleted');
+      test('toString is RegisterEmailCompleted', () {
+        expect(RegisterEmailCompleted().toString(), 'RegisterEmailCompleted');
       });
     });
 
-    group('LoginLoading', () {
+    group('RegisterEmailOnGoing', () {
       test('props are []', () {
-        expect(LoginLoading().props, []);
+        expect(RegisterEmailOnGoing().props, []);
       });
 
-      test('toString is LoginLoading', () {
-        expect(LoginLoading().toString(), 'LoginLoading');
+      test('toString is RegisterEmailOnGoing', () {
+        expect(RegisterEmailOnGoing().toString(), 'RegisterEmailOnGoing');
       });
     });
 
-    group('LoginFailure', () {
+    group('RegisterEmailFailure', () {
       test('props are [error]', () {
-        expect(LoginFailure(error: 'error').props, ['error']);
+        expect(RegisterEmailFailure(error: 'error').props, ['error']);
       });
 
-      test('toString is LoginFailure { error: error }', () {
+      test('toString is RegisterEmailFailure { error: error }', () {
         expect(
-          LoginFailure(error: 'error').toString(),
-          'LoginFailure { error: error }',
+          RegisterEmailFailure(error: 'error').toString(),
+          'RegisterEmailFailure { error: error }',
         );
       });
     });

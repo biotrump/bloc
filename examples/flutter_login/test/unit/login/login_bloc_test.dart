@@ -5,21 +5,21 @@ import 'package:mockito/mockito.dart';
 import 'package:user_repository/user_repository.dart';
 
 import 'package:flutter_login/authentication/authentication.dart';
-import 'package:flutter_login/login/bloc/login_bloc.dart';
+import 'package:flutter_login/register/bloc/register_email_bloc.dart';
 
 class MockUserRepository extends Mock implements UserRepository {}
 
 class MockAuthenticationBloc extends Mock implements AuthenticationBloc {}
 
 void main() {
-  LoginBloc loginBloc;
+  RegisterEmailBloc loginBloc;
   MockUserRepository userRepository;
   MockAuthenticationBloc authenticationBloc;
 
   setUp(() {
     userRepository = MockUserRepository();
     authenticationBloc = MockAuthenticationBloc();
-    loginBloc = LoginBloc(
+    loginBloc = RegisterEmailBloc(
       userRepository: userRepository,
       authenticationBloc: authenticationBloc,
     );
@@ -32,7 +32,7 @@ void main() {
 
   test('throws AssertionError when userRepository is null', () {
     expect(
-      () => LoginBloc(
+      () => RegisterEmailBloc(
         userRepository: null,
         authenticationBloc: authenticationBloc,
       ),
@@ -42,7 +42,7 @@ void main() {
 
   test('throws AssertionError when authenticationBloc is null', () {
     expect(
-      () => LoginBloc(
+      () => RegisterEmailBloc(
         userRepository: userRepository,
         authenticationBloc: null,
       ),
@@ -51,20 +51,20 @@ void main() {
   });
 
   test('initial state is correct', () {
-    expect(LoginCompleted(), loginBloc.initialState);
+    expect(RegisterEmailCompleted(), loginBloc.initialState);
   });
 
   test('close does not emit new states', () {
     expectLater(
       loginBloc,
-      emitsInOrder([LoginCompleted(), emitsDone]),
+      emitsInOrder([RegisterEmailCompleted(), emitsDone]),
     );
     loginBloc.close();
   });
 
-  group('LoginButtonPressed', () {
+  group('SignUpButtonPressed', () {
     blocTest(
-      'emits [LoginLoading, LoginCompleted] and token on success',
+      'emits [RegisterEmailOnGoing, RegisterEmailCompleted] and token on success',
       build: () async {
         when(userRepository.authenticate(
           username: 'valid.username',
@@ -73,22 +73,22 @@ void main() {
         return loginBloc;
       },
       act: (bloc) => bloc.add(
-        LoginButtonPressed(
+        SignUpButtonPressed(
           username: 'valid.username',
           //password: 'valid.password',
         ),
       ),
       expect: [
-        LoginLoading(),
-        LoginCompleted(),
+        RegisterEmailOnGoing(),
+        RegisterEmailCompleted(),
       ],
       verify: (_) async {
-        verify(authenticationBloc.add(LoggedIn(token: 'token'))).called(1);
+        verify(authenticationBloc.add(CryptoSDKIn(token: 'token'))).called(1);
       },
     );
 
     blocTest(
-      'emits [LoginLoading, LoginFailure] on failure',
+      'emits [RegisterEmailOnGoing, RegisterEmailFailure] on failure',
       build: () async {
         when(userRepository.authenticate(
           username: 'valid.username',
@@ -97,14 +97,14 @@ void main() {
         return loginBloc;
       },
       act: (bloc) => bloc.add(
-        LoginButtonPressed(
+        SignUpButtonPressed(
           username: 'valid.username',
           //password: 'valid.password',
         ),
       ),
       expect: [
-        LoginLoading(),
-        LoginFailure(error: 'Exception: login-error'),
+        RegisterEmailOnGoing(),
+        RegisterEmailFailure(error: 'Exception: login-error'),
       ],
       verify: (_) async {
         verifyNever(authenticationBloc.add(any));

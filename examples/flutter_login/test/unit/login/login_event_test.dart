@@ -6,7 +6,7 @@ void main() {
     group('LoginButtonPressed', () {
       test('props are [username, password]', () {
         expect(
-          LoginButtonPressed(username: 'username', password: 'password').props,
+          LoginButtonPressed(username: 'username' /*, password: 'password' */).props,
           ['username', 'password'],
         );
       });
@@ -17,7 +17,7 @@ void main() {
         expect(
           LoginButtonPressed(
             username: 'username',
-            password: 'password',
+            //password: 'password',
           ).toString(),
           'LoginButtonPressed { username: username, password: password }',
         );

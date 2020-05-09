@@ -7,9 +7,10 @@ abstract class LoginState extends Equatable {
   List<Object> get props => [];
 }
 
-class LoginInitial extends LoginState {}
-
+//widget to show progress
 class LoginLoading extends LoginState {}
+
+class LoginCompleted extends LoginState {}
 
 class LoginFailure extends LoginState {
   final String error;

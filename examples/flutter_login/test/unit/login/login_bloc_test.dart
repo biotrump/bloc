@@ -51,36 +51,36 @@ void main() {
   });
 
   test('initial state is correct', () {
-    expect(LoginInitial(), loginBloc.initialState);
+    expect(LoginCompleted(), loginBloc.initialState);
   });
 
   test('close does not emit new states', () {
     expectLater(
       loginBloc,
-      emitsInOrder([LoginInitial(), emitsDone]),
+      emitsInOrder([LoginCompleted(), emitsDone]),
     );
     loginBloc.close();
   });
 
   group('LoginButtonPressed', () {
     blocTest(
-      'emits [LoginLoading, LoginInitial] and token on success',
+      'emits [LoginLoading, LoginCompleted] and token on success',
       build: () async {
         when(userRepository.authenticate(
           username: 'valid.username',
-          password: 'valid.password',
+          //password: 'valid.password',
         )).thenAnswer((_) => Future.value('token'));
         return loginBloc;
       },
       act: (bloc) => bloc.add(
         LoginButtonPressed(
           username: 'valid.username',
-          password: 'valid.password',
+          //password: 'valid.password',
         ),
       ),
       expect: [
         LoginLoading(),
-        LoginInitial(),
+        LoginCompleted(),
       ],
       verify: (_) async {
         verify(authenticationBloc.add(LoggedIn(token: 'token'))).called(1);
@@ -92,14 +92,14 @@ void main() {
       build: () async {
         when(userRepository.authenticate(
           username: 'valid.username',
-          password: 'valid.password',
+          //password: 'valid.password',
         )).thenThrow(Exception('login-error'));
         return loginBloc;
       },
       act: (bloc) => bloc.add(
         LoginButtonPressed(
           username: 'valid.username',
-          password: 'valid.password',
+          //password: 'valid.password',
         ),
       ),
       expect: [

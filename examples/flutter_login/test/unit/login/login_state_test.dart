@@ -3,13 +3,13 @@ import 'package:flutter_login/login/bloc/login_bloc.dart';
 
 void main() {
   group('LoginState', () {
-    group('LoginInitial', () {
+    group('LoginCompleted', () {
       test('props are []', () {
-        expect(LoginInitial().props, []);
+        expect(LoginCompleted().props, []);
       });
 
-      test('toString is LoginInitial', () {
-        expect(LoginInitial().toString(), 'LoginInitial');
+      test('toString is LoginCompleted', () {
+        expect(LoginCompleted().toString(), 'LoginCompleted');
       });
     });
 

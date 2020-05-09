@@ -1,5 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:flutter_login/authentication/authentication.dart';
+
+class SplashScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        child: SplashPage(),
+      ),
+    );
+  }
+}
 
 class SplashPage extends StatefulWidget {
 
@@ -13,8 +27,9 @@ class _SplashPage extends State<SplashPage> {
   bool agreeEula = false;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
+    return //Scaffold(
+      //body: 
+      Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
@@ -41,9 +56,8 @@ class _SplashPage extends State<SplashPage> {
                   ),
             onPressed: !agreeEula ? null : () {
               print('clicked!');
-              //goto email sign up page
-              //BlocProvider.of<Bloc<OOBEEvent, OOBEState>>(context).add(OOBEApproveEulaEvent());
-              //BlocProvider.of<OOBEBloc>(context).add(OOBEApproveEulaEvent());
+              //send a bloc event to load email sign up page
+              BlocProvider.of<AuthenticationBloc>(context).add(EulaAgreed());
             },
             child: Text("Setup Trio"),
           ),
@@ -51,10 +65,10 @@ class _SplashPage extends State<SplashPage> {
             child: Text('Eula Screen'),
           ),
         ],
-      ),
+      );
       
       
-    );
+    //);
   }
 
   //launch mobile brower

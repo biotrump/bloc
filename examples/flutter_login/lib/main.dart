@@ -34,6 +34,7 @@ void main() {
   BlocSupervisor.delegate = SimpleBlocDelegate();
   final userRepository = UserRepository();
   runApp(
+    //procide a bloc for children.
     BlocProvider<AuthenticationBloc>(
       create: (context) {
         //..add(AppStarted()): Notifies the [bloc] of a new [event] which triggers [mapEventToState].
@@ -68,8 +69,9 @@ class App extends StatelessWidget {
           }
           //default page
           //if(state is AuthenticationEula){
-            return SplashPage();
+            return SplashScreen();  //SplashPage();
           //}
+          //return null;
         },
       ),
     );

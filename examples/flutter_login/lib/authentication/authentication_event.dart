@@ -10,6 +10,9 @@ abstract class AuthenticationEvent extends Equatable {
 
 class AppStarted extends AuthenticationEvent {}
 
+class EulaAgreed extends AuthenticationEvent {}
+
+//
 class LoggedIn extends AuthenticationEvent {
   final String token;
 

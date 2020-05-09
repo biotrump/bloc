@@ -21,22 +21,31 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         assert(authenticationBloc != null);
 
   @override
-  LoginState get initialState => LoginInitial();
+  LoginState get initialState => LoginCompleted();
 
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
     if (event is LoginButtonPressed) {
-      yield LoginLoading();
+      yield LoginLoading();//show loading .....
 
       try {
+        //wait for user account authentication
+        //get domain entrance
+
+        //
         final token = await userRepository.authenticate(
           username: event.username,
-          password: event.password,
         );
+        //yes, authenticated, update login UI
+        yield LoginCompleted();
 
-        authenticationBloc.add(LoggedIn(token: token));
-        yield LoginInitial();
+        //do something special
+        await Future.delayed(Duration(seconds: 2));
+        //inform bloc to goto next page
+        authenticationBloc.add(LoggedIn(token: token));//send bloc event with token for next stage process
+        //do something and goto next state
       } catch (error) {
+        //no, authentication failure
         yield LoginFailure(error: error.toString());
       }
     }

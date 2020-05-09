@@ -13,6 +13,12 @@ class AuthenticationBloc
   AuthenticationBloc({@required this.userRepository})
       : assert(userRepository != null);
 
+  //when flutter_bloc is created, the bloc constructor gets initialState first.
+  /*Bloc() {
+    _state = initialState;
+    _bindEventsToStates();
+  }
+  */
   @override
   AuthenticationState get initialState => AuthenticationUninitialized();
 
@@ -21,6 +27,10 @@ class AuthenticationBloc
     AuthenticationEvent event,
   ) async* {
     if (event is AppStarted) {
+      yield AuthenticationEula();
+    }
+    /*
+    {
       final bool hasToken = await userRepository.hasToken();
 
       if (hasToken) {
@@ -29,7 +39,7 @@ class AuthenticationBloc
         yield AuthenticationUnauthenticated();
       }
     }
-
+*/
     if (event is LoggedIn) {
       yield AuthenticationLoading();
       await userRepository.persistToken(event.token);

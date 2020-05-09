@@ -36,8 +36,11 @@ void main() {
   runApp(
     BlocProvider<AuthenticationBloc>(
       create: (context) {
+        //..add(AppStarted()): Notifies the [bloc] of a new [event] which triggers [mapEventToState].
+        //If [close] has already been called, any subsequent calls to [add] will be delegated to the [onError]
+        //method which can be overridden at the [bloc] as well as the [BlocDelegate] level.
         return AuthenticationBloc(userRepository: userRepository)
-          ..add(AppStarted());
+          ..add(AppStarted());  //sends a new state after the flutter_bloc is created
       },
       child: App(userRepository: userRepository),
     ),
@@ -63,7 +66,10 @@ class App extends StatelessWidget {
           if (state is AuthenticationLoading) {
             return LoadingIndicator();
           }
-          return SplashPage();
+          //default page
+          //if(state is AuthenticationEula){
+            return SplashPage();
+          //}
         },
       ),
     );

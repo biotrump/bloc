@@ -21,7 +21,7 @@ class RegisterEmailBloc extends Bloc<RegisterEmailEvent, LoginState> {
         assert(authenticationBloc != null);
 
   @override
-  LoginState get initialState => RegisterEmailCompleted();
+  LoginState get initialState => RegisterEmailUninitialized();
 
   @override
   Stream<LoginState> mapEventToState(RegisterEmailEvent event) async* {
@@ -36,13 +36,14 @@ class RegisterEmailBloc extends Bloc<RegisterEmailEvent, LoginState> {
         final token = await userRepository.authenticate(
           username: event.username,
         );
-        //yes, authenticated, update login UI
-        yield RegisterEmailCompleted();
-
         //do something special
         await Future.delayed(Duration(seconds: 2));
+
+        //yes, authenticated, update login UI
+        yield RegisterEmailCompleted(username: event.username, token: token);
+
         //inform bloc to goto next page
-        authenticationBloc.add(CryptoSDKIn(username: event.username, token: token));//send bloc event with token for next stage process
+        //authenticationBloc.add(CryptoSDKIn(username: event.username, token: token));//send bloc event with token for next stage process
         //do something and goto next state
       } catch (error) {
         //no, authentication failure

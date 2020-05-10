@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_login/register/bloc/register_email_bloc.dart';
 import 'package:email_validator/email_validator.dart';
 
+import 'package:flutter_login/authentication/authentication.dart';
 import 'bloc/register_email_bloc.dart';
 
 //import 'package:flutter_login/validators.dart';
@@ -67,6 +68,9 @@ class _RegisterEmailFormState extends State<RegisterEmailForm> {
               backgroundColor: Colors.blue,
             ),
           );
+          //inform bloc to goto next page
+          BlocProvider.of<AuthenticationBloc>(context)
+          ..add(CryptoSDKIn(username: state.username, token: state.token));//send bloc event with token for next stage process
         }
       },
       child: BlocBuilder<RegisterEmailBloc, LoginState>(

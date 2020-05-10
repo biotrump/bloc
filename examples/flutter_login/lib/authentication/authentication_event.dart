@@ -10,7 +10,7 @@ abstract class AuthenticationEvent extends Equatable {
 
 class AppStarted extends AuthenticationEvent {}
 
-class RegisterEmailAccount extends AuthenticationEvent {}
+class EULAIsApprovedEvent extends AuthenticationEvent {}
 
 //ui->bloc
 class CryptoSDKIn extends AuthenticationEvent {

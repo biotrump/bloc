@@ -36,7 +36,7 @@ class AuthenticationBloc
       yield AuthenticationEula();
     }
 
-    if (event is RegisterEmailAccount){
+    if (event is EULAIsApprovedEvent){
       yield AuthenticationRegisterEmail();
     }
 

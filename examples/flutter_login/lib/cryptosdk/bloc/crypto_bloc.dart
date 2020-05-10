@@ -33,6 +33,8 @@ class CryptoBloc
       //bloc->ui
       //check key server or key card???
       yield CryptoKeyServer();
+      yield CryptoLoading();
+      await Future.delayed(Duration(seconds: 3));
     }
 
     if (event is CryptoOut) {
@@ -40,7 +42,7 @@ class CryptoBloc
       yield CryptoCompleted();
 
       //wait for a moment
-     await Future.delayed(Duration(seconds: 2));
+      await Future.delayed(Duration(seconds: 2));
       //send an event to inform bloc to goto next page
       authenticationBloc.add(CongratulationIn());
     }

@@ -1,3 +1,6 @@
+//UI sends Events to Bloc that some thing happens.
+//BLoC sends State to UI to update/show UI.
+
 import 'dart:async';
 
 import 'package:meta/meta.dart';
@@ -24,6 +27,7 @@ class AuthenticationBloc
   @override
   AuthenticationState get initialState => AuthenticationUninitialized();
 
+  //UI sends events to Bloc.
   @override
   Stream<AuthenticationState> mapEventToState(
     AuthenticationEvent event,
@@ -32,7 +36,7 @@ class AuthenticationBloc
       yield AuthenticationEula();
     }
 
-    if (event is EulaAgreed){
+    if (event is RegisterEmailAccount){
       yield AuthenticationRegisterEmail();
     }
 

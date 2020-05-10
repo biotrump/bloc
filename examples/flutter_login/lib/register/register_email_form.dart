@@ -7,12 +7,12 @@ import 'bloc/register_email_bloc.dart';
 
 //import 'package:flutter_login/validators.dart';
 
-class LoginForm extends StatefulWidget {
+class RegisterEmailForm extends StatefulWidget {
   @override
-  State<LoginForm> createState() => _LoginFormState();
+  State<RegisterEmailForm> createState() => _RegisterEmailFormState();
 }
 
-class _LoginFormState extends State<LoginForm> {
+class _RegisterEmailFormState extends State<RegisterEmailForm> {
   final _usernameController = TextEditingController();
   //final _passwordController = TextEditingController();
   bool cancel=false;

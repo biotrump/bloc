@@ -27,7 +27,7 @@ class RegisterEmailPage extends StatelessWidget {
             userRepository: userRepository,
           );
         },
-        child: LoginForm(),
+        child: RegisterEmailForm(),
       ),
     );
   }

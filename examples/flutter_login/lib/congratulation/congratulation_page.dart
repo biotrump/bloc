@@ -18,36 +18,32 @@ class CongratulationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Congratulation to Pin Page'),
+        title: Text('Congratulation!'),
       ),
       body: Column (
         children:[ 
-          Center(
-            child: RaisedButton(
-              child: Text('Next'),
-              onPressed: () {
-                BlocProvider.of<AuthenticationBloc>(context).add(SummaryIn());
-              },
-            )
-          ),
-          /*
           ListView(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
             children: <Widget>[
-              Text("Welcome to use Trio. Your Trio Desktop PIN is xxxx.",
-                style: TextStyle(fontSize: 25),
+              Text("0000",
+                style: TextStyle(fontSize: 40),
+                textAlign: TextAlign.center),
+              Text("Enjoy using Trio App to protect all your communications. Please use the PIN code above to login Trio Desktop",
+                //style: TextStyle(fontSize: 25),
                 textAlign: TextAlign.justify,
               ),
               Center(
                   child: RaisedButton(
-                child: Text('OK'),
+                child: Text('Complete'),
                 onPressed: () {
                   //ui sends an event to bloc to go out congratulation page.
-                  //BlocProvider.of<AuthenticationBloc>(context).add(SummaryIn());
+                  BlocProvider.of<AuthenticationBloc>(context).add(SummaryIn());
                 },
               )),
             ],
           ),
-          */
+          
         ],
       ),
     );

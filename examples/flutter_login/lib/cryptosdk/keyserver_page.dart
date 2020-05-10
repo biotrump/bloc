@@ -7,7 +7,6 @@ import 'package:user_repository/user_repository.dart';
 import 'package:flutter_login/authentication/authentication.dart';
 import 'package:flutter_login/cryptosdk/bloc/crypto.dart';
 
-/*
 class KeyServerPage extends StatelessWidget {
   final UserRepository userRepository;
 
@@ -19,43 +18,17 @@ class KeyServerPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('keyserver Registration'),
+        title: Text('Keyserver Registration'),
       ),
       body: BlocProvider(
-        create: (context) {
+        create: (context) { //create a new bloc for this page/widget
           return CryptoBloc(
             authenticationBloc: BlocProvider.of<AuthenticationBloc>(context),
             userRepository: userRepository,
-          );
+          )
+          ..add(CryptoIn());  //UI sends an event that ui is in.
         },
-        child: KeyServerForm(),
-      ),
-    );
-  }
-}
-*/
-
-class KeyServerPage extends StatelessWidget {
-  final UserRepository userRepository;
-
-  KeyServerPage({Key key, @required this.userRepository})
-      : assert(userRepository != null),
-        super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Keyserver Crypto'),
-      ),
-      body: BlocProvider(
-        create: (context) {
-          return CryptoBloc(
-            authenticationBloc: BlocProvider.of<AuthenticationBloc>(context),
-            userRepository: userRepository,
-          );
-        },
-        child: KeyServerForm(),
+        child: KeyServerForm(), //provide the bloc to its child widget
       ),
     );
   }

@@ -60,7 +60,7 @@ class _WelcomePage extends State<WelcomePage> {
             onPressed: !agreeEula ? null : () {
               print('clicked!');
               //send a bloc event to load email sign up page
-              BlocProvider.of<AuthenticationBloc>(context).add(EulaAgreed());
+              BlocProvider.of<AuthenticationBloc>(context).add(RegisterEmailAccount());
             },
             child: Text("Setup Trio"),
           ),

@@ -69,8 +69,9 @@ class _RegisterEmailFormState extends State<RegisterEmailForm> {
             ),
           );
           //inform bloc to goto next page
-          BlocProvider.of<AuthenticationBloc>(context)
-          ..add(CryptoSDKIn(username: state.username, token: state.token));//send bloc event with token for next stage process
+          //BlocProvider.of<AuthenticationBloc>(context)
+          //..add(CryptoSDKIn(username: state.username, token: state.token));//send bloc event with token for next stage process
+          BlocProvider.of<RegisterEmailBloc>(context).add(SignUpCompleted());
         }
       },
       child: BlocBuilder<RegisterEmailBloc, LoginState>(

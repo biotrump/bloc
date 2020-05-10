@@ -83,7 +83,7 @@ void main() {
         RegisterEmailCompleted(),
       ],
       verify: (_) async {
-        verify(authenticationBloc.add(CryptoSDKIn(token: 'token'))).called(1);
+        verify(authenticationBloc.add(CryptoSDKIn())).called(1);
       },
     );
 

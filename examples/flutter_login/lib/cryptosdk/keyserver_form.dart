@@ -55,11 +55,12 @@ class _KeyServerForm extends State<KeyServerForm> {
       },
       child: BlocBuilder<CryptoBloc, CryptoState>(
         builder: (context, state) {
+          var authenticationBloc = BlocProvider.of<CryptoBloc>(context).authenticationBloc;
           return Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Text('The key server is registering.',
+              Text('The key server is registering for [${authenticationBloc.username}].',
                 style: TextStyle(fontSize: 20),
                 textAlign: TextAlign.center
               ),

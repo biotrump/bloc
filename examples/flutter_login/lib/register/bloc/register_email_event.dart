@@ -25,3 +25,5 @@ class SignUpButtonPressed extends RegisterEmailEvent {
 
 //signup button is now "cancel" function.
 class SignUpCancelButtonPressed extends RegisterEmailEvent {}
+
+class SignUpCompleted extends RegisterEmailEvent {}

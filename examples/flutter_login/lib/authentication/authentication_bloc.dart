@@ -14,6 +14,8 @@ import 'authentication_event.dart';
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   final UserRepository userRepository;
+  String token="";
+  String username="";
 
   AuthenticationBloc({@required this.userRepository})
       : assert(userRepository != null);
@@ -40,6 +42,12 @@ class AuthenticationBloc
       yield AuthenticationRegisterEmail();
     }
 
+    //register_email_block.dart sends account info to this bloc.
+    if (event is SetEmailAccountInfo){
+      this.token = event.token;
+      this.username = event.username;
+    }
+  
     if (event is CryptoSDKIn) {
       //yield AuthenticationLoading();
       //await userRepository.persistToken(event.token);

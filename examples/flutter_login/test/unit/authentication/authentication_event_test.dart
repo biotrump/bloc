@@ -15,12 +15,12 @@ void main() {
 
     group('CryptoSDKIn', () {
       test('props are [token]', () {
-        expect(CryptoSDKIn(token: 'token').props, ['token']);
+        expect(CryptoSDKIn().props, ['token']);
       });
 
       test('toString is "CryptoSDKIn { token: token }"', () {
         expect(
-          CryptoSDKIn(token: 'token').toString(),
+          CryptoSDKIn().toString(),
           'CryptoSDKIn { token: token }',
         );
       });

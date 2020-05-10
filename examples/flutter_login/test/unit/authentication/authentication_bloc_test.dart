@@ -70,7 +70,7 @@ void main() {
     blocTest(
       'emits [loading, authenticated] when token is persisted',
       build: () async => authenticationBloc,
-      act: (bloc) => bloc.add(CryptoSDKIn(token: 'instance.token')),
+      act: (bloc) => bloc.add(CryptoSDKIn()),
       expect: [
         AuthenticationLoading(),
         AuthenticationCryptoSDK(),
